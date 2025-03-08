@@ -1,0 +1,27 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .btn {
+    @apply px-4 py-2 rounded-lg font-medium transition-colors;
+  }
+  
+  .btn-primary {
+    @apply bg-midi-accent text-white hover:bg-opacity-90;
+  }
+  
+  .input-field {
+    @apply px-3 py-2 rounded-md border border-gray-300 focus:border-midi-accent focus:ring-1 focus:ring-midi-accent focus:outline-none;
+  }
+} 
+
+@keyframes slideIn {
+  from { transform: translateY(100%); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.notification {
+  @apply fixed bottom-4 right-4 px-4 py-2 rounded-lg shadow-lg;
+  animation: slideIn 0.3s ease-out;
+} 

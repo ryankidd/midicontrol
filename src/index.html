@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-gray-100">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MIDI Controller</title>
+    <link href="styles/output.css" rel="stylesheet">
+</head>
+<body class="h-full">
+    <div class="min-h-full">
+        <!-- Navigation -->
+        <nav class="bg-midi-dark">
+            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                <div class="flex h-16 items-center justify-between">
+                    <div class="flex items-center">
+                        <h1 class="text-white text-xl font-semibold">MIDI Controller</h1>
+                    </div>
+                    <div class="flex items-center">
+                        <select id="midiDeviceSelect" 
+                                class="input-field text-sm" 
+                                aria-label="Select MIDI Input Device">
+                            <option value="">Select MIDI Device</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        <!-- Main Content -->
+        <main class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-6">
+            <!-- MIDI Monitor -->
+            <div class="bg-white rounded-lg shadow p-6 mb-6">
+                <h2 class="text-lg font-semibold mb-4">MIDI Monitor</h2>
+                <div id="currentNote" 
+                     role="status" 
+                     aria-live="polite"
+                     class="text-lg font-mono bg-gray-50 p-4 rounded-md mb-4">
+                    Waiting for MIDI input...
+                </div>
+                <div id="midiHistory" 
+                     role="log" 
+                     aria-label="MIDI Event History"
+                     class="font-mono text-sm space-y-1 max-h-48 overflow-y-auto">
+                </div>
+            </div>
+
+            <!-- Mapping Configuration -->
+            <div class="bg-white rounded-lg shadow p-6">
+                <h2 class="text-lg font-semibold mb-4">Mapping Configuration</h2>
+                
+                <!-- Current Mappings -->
+                <div id="mappingsList" 
+                     role="list"
+                     class="space-y-4 mb-6">
+                </div>
+
+                <!-- New Mapping Form -->
+                <div class="mapping-form space-y-4" 
+                     role="form" 
+                     aria-label="New Mapping Configuration">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label for="triggerType" class="block text-sm font-medium text-gray-700 mb-1">
+                                Trigger Type
+                            </label>
+                            <select id="triggerType" 
+                                    class="input-field w-full"
+                                    aria-label="Trigger Type">
+                                <option value="velocity">Velocity Threshold</option>
+                                <option value="hold">Hold Duration</option>
+                                <option value="toggle">Toggle</option>
+                            </select>
+                        </div>
+
+                        <div id="triggerSettings" class="space-y-4">
+                            <div class="velocity-setting">
+                                <label for="threshold" class="block text-sm font-medium text-gray-700 mb-1">
+                                    Velocity Threshold (0-127)
+                                </label>
+                                <input type="number" 
+                                       id="threshold" 
+                                       min="0" 
+                                       max="127" 
+                                       value="64"
+                                       class="input-field w-full">
+                            </div>
+
+                            <div class="hold-setting hidden">
+                                <label for="holdDuration" class="block text-sm font-medium text-gray-700 mb-1">
+                                    Hold Duration (ms)
+                                </label>
+                                <input type="number" 
+                                       id="holdDuration" 
+                                       min="0" 
+                                       value="1000"
+                                       class="input-field w-full">
+                            </div>
+
+                            <div>
+                                <label for="triggerDelay" class="block text-sm font-medium text-gray-700 mb-1">
+                                    Delay (ms)
+                                </label>
+                                <input type="number" 
+                                       id="triggerDelay" 
+                                       min="0" 
+                                       value="0"
+                                       class="input-field w-full">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex justify-end">
+                        <button id="addMapping" 
+                                class="btn btn-primary"
+                                aria-label="Add New Mapping">
+                            Add Mapping
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="renderer.js"></script>
+</body>
+</html> 
