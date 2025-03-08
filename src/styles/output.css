@@ -634,6 +634,10 @@ video {
   --tw-ring-color: rgb(0 168 255 / var(--tw-ring-opacity, 1));
 }
 
+.static {
+  position: static;
+}
+
 .fixed {
   position: fixed;
 }
